@@ -1,0 +1,80 @@
+<view class="container">
+  <!-- 顶部标签栏 -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">
+      动态
+    </view>
+    <view class="tab {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">
+      活动
+    </view>
+  </view>
+
+  <!-- 动态列表 -->
+  <view class="content-area" hidden="{{activeTab !== 0}}">
+    <view class="post-list">
+      <view class="post-card" wx:for="{{posts}}" wx:key="id">
+        <view class="post-header">
+          <image class="user-avatar" src="{{item.userInfo.avatar}}" mode="aspectFill"></image>
+          <text class="user-name">{{item.userInfo.nickname}}</text>
+        </view>
+        
+        <view class="post-content">
+          <text class="content-text">{{item.content}}</text>
+          <view class="image-grid" wx:if="{{item.images.length > 0}}">
+            <image 
+              wx:for="{{item.images}}" 
+              wx:for-item="img" 
+              wx:key="*this" 
+              src="{{img}}" 
+              mode="aspectFill"
+              class="post-image {{item.images.length === 1 ? 'single' : ''}}"
+            ></image>
+          </view>
+        </view>
+
+        <view class="post-footer">
+          <view class="action-btn" bindtap="likePost" data-id="{{item.id}}">
+            <text class="icon">❤️</text>
+            <text>{{item.likes}}</text>
+          </view>
+          <view class="action-btn" bindtap="commentPost" data-id="{{item.id}}">
+            <text class="icon">💬</text>
+            <text>{{item.comments}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 活动列表 -->
+  <view class="content-area" hidden="{{activeTab !== 1}}">
+    <view class="activity-list">
+      <view class="activity-card" wx:for="{{activities}}" wx:key="id">
+        <view class="activity-info">
+          <text class="activity-title">{{item.title}}</text>
+          <view class="activity-detail">
+            <text class="detail-item">📅 {{item.date}}</text>
+            <text class="detail-item">📍 {{item.location}}</text>
+          </view>
+          <view class="participants-info">
+            <progress 
+              percent="{{item.participants/item.maxParticipants*100}}" 
+              stroke-width="3" 
+              color="#4CAF50" 
+              backgroundColor="#E0E0E0"
+            />
+            <text class="participants-text">{{item.participants}}/{{item.maxParticipants}}人</text>
+          </view>
+        </view>
+        <button 
+          class="join-btn {{item.participants >= item.maxParticipants ? 'disabled' : ''}}" 
+          bindtap="joinActivity" 
+          data-id="{{item.id}}"
+          disabled="{{item.participants >= item.maxParticipants}}"
+        >
+          {{item.participants >= item.maxParticipants ? '已满员' : '立即报名'}}
+        </button>
+      </view>
+    </view>
+  </view>
+</view> 

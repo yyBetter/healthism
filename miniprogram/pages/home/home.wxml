@@ -1,0 +1,73 @@
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <!-- 未登录状态 -->
+    <view class="user-info-unlogin" wx:if="{{!isLogin}}" bindtap="handleLogin">
+      <image class="avatar" src="/assets/default-avatar.png" mode="aspectFill"></image>
+      <view class="login-guide">
+        <text class="guide-text">登录后查看更多健康数据</text>
+        <button class="login-now-btn">微信一键登录</button>
+      </view>
+    </view>
+
+    <!-- 已登录状态 -->
+    <view class="user-info" wx:else>
+      <view class="user-basic-info">
+        <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+        <view class="user-detail">
+          <text class="nickname">{{userInfo.nickName}}</text>
+          <text class="user-id">ID: {{userInfo.userId || '--'}}</text>
+        </view>
+      </view>
+      <view class="settings-btn" bindtap="showSettingsMenu">
+        <image class="settings-icon" src="/assets/settings.png" mode="aspectFit"></image>
+      </view>
+    </view>
+
+    <!-- 数据统计 - 仅登录后显示 -->
+    <view class="stats-row" wx:if="{{isLogin}}">
+      <view class="stat-item">
+        <text class="stat-value">{{todayStats.steps}}</text>
+        <text class="stat-label">今日步数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{todayStats.calories}}</text>
+        <text class="stat-label">消耗卡路里</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{todayStats.distance}}km</text>
+        <text class="stat-label">运动距离</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 目标列表 -->
+  <view class="goals-section">
+    <view class="section-header">
+      <text class="section-title">我的目标</text>
+      <view class="add-goal" bindtap="addNewGoal" wx:if="{{isLogin}}">
+        <text class="add-icon">+</text>
+        <text>添加</text>
+      </view>
+    </view>
+    
+    <view class="goals-list" wx:if="{{isLogin}}">
+      <view class="goal-card" wx:for="{{goals}}" wx:key="id" bindtap="viewGoalDetail" data-id="{{item.id}}">
+        <view class="goal-info">
+          <text class="goal-title">{{item.title}}</text>
+          <text class="goal-target">目标: {{item.target}}</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-inner" style="width: {{item.progress}}%"></view>
+        </view>
+        <text class="progress-text">{{item.progress}}%</text>
+      </view>
+    </view>
+
+    <!-- 未登录提示 -->
+    <view class="empty-tips" wx:else>
+      <image class="empty-icon" src="/assets/empty-goals.png" mode="aspectFit"></image>
+      <text class="tips-text">登录后查看您的健康目标</text>
+    </view>
+  </view>
+</view> 

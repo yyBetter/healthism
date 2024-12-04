@@ -1,0 +1,105 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo {
+  width: 240rpx;
+  height: 240rpx;
+  margin-bottom: 60rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 56rpx;
+  color: #333333;
+  font-weight: 600;
+  margin-bottom: 40rpx;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica;
+  letter-spacing: 2rpx;
+}
+
+.slogan {
+  font-size: 28rpx;
+  color: #666666;
+  margin-bottom: 80rpx;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.auth-button {
+  width: 600rpx;
+  height: 88rpx;
+  background: #4CAF50;
+  border-radius: 44rpx;
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  margin-top: 40rpx;
+  box-shadow: 0 8rpx 16rpx rgba(76, 175, 80, 0.2);
+  transition: all 0.3s ease;
+}
+
+.auth-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 8rpx rgba(76, 175, 80, 0.2);
+}
+
+.auth-button::after {
+  border: none;
+}
+
+.userinfo-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+  border: 6rpx solid #4CAF50;
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.1);
+}
+
+.userinfo-nickname {
+  font-size: 36rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+}
+
+.decoration {
+  position: absolute;
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
+  z-index: 1;
+}
+
+.decoration-1 {
+  top: -200rpx;
+  left: -200rpx;
+}
+
+.decoration-2 {
+  bottom: -200rpx;
+  right: -200rpx;
+} 
