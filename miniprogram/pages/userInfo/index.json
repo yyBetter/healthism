@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "update-status": "../../components/update-status/index",
+    "float-button": "../../components/float-button/index"
+  }
+} 

@@ -1,0 +1,8 @@
+<view class="update-buttons">
+  <button class="primary-btn" bindtap="handleUpdate" data-has-changes="true">
+    确认更新
+  </button>
+  <button class="secondary-btn" bindtap="handleUpdate" data-has-changes="false">
+    数据无变化
+  </button>
+</view> 

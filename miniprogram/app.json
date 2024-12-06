@@ -4,7 +4,8 @@
     "pages/home/home",
     "pages/explore/explore",
     "pages/login/login",
-    "pages/profile/edit"
+    "pages/profile/edit",
+    "pages/weight-goal/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

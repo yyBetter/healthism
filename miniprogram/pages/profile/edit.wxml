@@ -64,7 +64,39 @@
         bindinput="inputWeight"
       />
     </view>
+
+    <view class="form-item">
+      <text class="label">运动习惯</text>
+      <picker 
+        bindchange="bindActivityLevelChange" 
+        value="{{activityLevelIndex}}" 
+        range="{{activityLevelOptions}}"
+      >
+        <view class="picker">
+          {{activityLevelOptions[activityLevelIndex]}}
+          <text class="arrow">></text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="calculated-info" wx:if="{{bmr && tdee}}">
+      <view class="info-item">
+        <text class="info-label">基础代谢率(BMR)</text>
+        <text class="info-value">{{bmr}} 千卡/天</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">每日消耗(TDEE)</text>
+        <text class="info-value">{{tdee}} 千卡/天</text>
+      </view>
+    </view>
   </view>
 
-  <button class="save-btn" bindtap="saveProfile">保存</button>
+  <view class="update-buttons">
+    <button class="primary-btn" bindtap="handleUpdate" data-has-changes="true">
+      确认更新
+    </button>
+    <button class="secondary-btn" bindtap="handleUpdate" data-has-changes="false">
+      数据无变化
+    </button>
+  </view>
 </view> 

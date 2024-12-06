@@ -1,0 +1,6 @@
+<view class="update-status">
+  <view class="time">上次更新：{{timeText}}</view>
+  <view class="status {{statusText === '数据精准' ? 'status-good' : 'status-warning'}}">
+    {{statusText}}
+  </view>
+</view> 

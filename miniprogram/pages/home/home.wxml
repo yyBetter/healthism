@@ -24,6 +24,11 @@
       </view>
     </view>
 
+    <!-- 添加更新状态组件 - 仅登录后显示 -->
+    <view class="update-status-wrapper" wx:if="{{isLogin}}">
+      <update-status lastUpdateTime="{{lastUpdateTime}}"></update-status>
+    </view>
+
     <!-- 数据统计 - 仅登录后显示 -->
     <view class="stats-row" wx:if="{{isLogin}}">
       <view class="stat-item">
@@ -32,11 +37,38 @@
       </view>
       <view class="stat-item">
         <text class="stat-value">{{todayStats.calories}}</text>
-        <text class="stat-label">消耗卡路里</text>
+        <text class="stat-label">实际消耗</text>
       </view>
       <view class="stat-item">
-        <text class="stat-value">{{todayStats.distance}}km</text>
-        <text class="stat-label">运动距离</text>
+        <text class="stat-value">{{healthProfile.tdee || '--'}}</text>
+        <text class="stat-label">目标消耗</text>
+      </view>
+    </view>
+
+    <!-- 添加详细能量信息卡片 -->
+    <view class="energy-card" wx:if="{{isLogin}}">
+      <view class="card-header">
+        <text class="card-title">今日能量详情</text>
+      </view>
+      <view class="energy-details">
+        <view class="energy-item">
+          <text class="label">基础代谢(BMR)</text>
+          <text class="value">{{healthProfile.bmr || '--'}} 千卡</text>
+        </view>
+        <view class="energy-item">
+          <text class="label">目标消耗(TDEE)</text>
+          <text class="value">{{healthProfile.tdee || '--'}} 千卡</text>
+        </view>
+        <view class="energy-item">
+          <text class="label">实际消耗</text>
+          <text class="value {{todayStats.calories > healthProfile.tdee ? 'exceed' : ''}}">
+            {{todayStats.calories}} 千卡
+          </text>
+        </view>
+        <view class="energy-item">
+          <text class="label">运动消耗</text>
+          <text class="value">{{todayStats.activeCalories || 0}} 千卡</text>
+        </view>
       </view>
     </view>
   </view>
@@ -45,12 +77,37 @@
   <view class="goals-section">
     <view class="section-header">
       <text class="section-title">我的目标</text>
-      <view class="add-goal" bindtap="addNewGoal" wx:if="{{isLogin}}">
-        <text class="add-icon">+</text>
-        <text>添加</text>
+      <view class="action-buttons" wx:if="{{isLogin}}">
+        <view class="add-goal" bindtap="addWeightGoal">
+          <text class="add-icon">+</text>
+          <text>设定减重目标</text>
+        </view>
       </view>
     </view>
     
+    <!-- 减重目标卡片 -->
+    <view class="weight-goal-card" wx:if="{{weightGoal}}" bindtap="editWeightGoal">
+      <view class="goal-header">
+        <text class="goal-type">减重目标</text>
+        <text class="goal-status {{weightGoal.isHealthy ? 'healthy' : 'warning'}}">
+          {{weightGoal.isHealthy ? '健康计划' : '需要调整'}}
+        </text>
+      </view>
+      <view class="goal-content">
+        <view class="target">
+          <text class="label">目标体重</text>
+          <text class="value">{{weightGoal.targetWeight}}kg</text>
+        </view>
+        <view class="progress-info">
+          <text class="progress-text">已完成 {{weightGoal.progress}}%</text>
+          <view class="progress-bar">
+            <view class="progress-inner" style="width: {{weightGoal.progress}}%"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 其他目标列表 -->
     <view class="goals-list" wx:if="{{isLogin}}">
       <view class="goal-card" wx:for="{{goals}}" wx:key="id" bindtap="viewGoalDetail" data-id="{{item.id}}">
         <view class="goal-info">
@@ -70,4 +127,6 @@
       <text class="tips-text">登录后查看您的健康目标</text>
     </view>
   </view>
+
+  <float-button></float-button>
 </view> 

@@ -151,13 +151,16 @@
 .add-goal {
   display: flex;
   align-items: center;
-  color: #4CAF50;
+  padding: 8rpx 20rpx;
+  background: #4CAF50;
+  color: #ffffff;
   font-size: 28rpx;
+  border-radius: 30rpx;
 }
 
 .add-icon {
-  font-size: 32rpx;
   margin-right: 8rpx;
+  font-size: 32rpx;
 }
 
 .goals-list {
@@ -230,4 +233,137 @@
 .tips-text {
   font-size: 28rpx;
   color: #999999;
+}
+
+.update-status-wrapper {
+  padding: 16rpx 24rpx;
+  border-top: 1px solid #f5f5f5;
+  background: #ffffff;
+}
+
+.energy-card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin: 30rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.energy-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.energy-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.energy-item:last-child {
+  border-bottom: none;
+}
+
+.energy-item .label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.energy-item .value {
+  font-size: 28rpx;
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+.energy-item .value.exceed {
+  color: #FF9800;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.weight-goal-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.goal-type {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333333;
+}
+
+.goal-status {
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+}
+
+.goal-status.healthy {
+  background: #E8F5E9;
+  color: #4CAF50;
+}
+
+.goal-status.warning {
+  background: #FFF3E0;
+  color: #FF9800;
+}
+
+.goal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.target {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.target .label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.target .value {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.progress-info {
+  margin-top: 10rpx;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #666666;
+  margin-bottom: 8rpx;
+  display: block;
 } 

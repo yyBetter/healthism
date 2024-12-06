@@ -1,0 +1,114 @@
+<view class="container">
+  <view class="goal-card">
+    <view class="current-status">
+      <view class="status-item">
+        <text class="label">当前体重</text>
+        <text class="value">{{healthProfile.weight || '--'}} kg</text>
+      </view>
+      <view class="status-item">
+        <text class="label">BMI指数</text>
+        <text class="value {{bmiStatus.class}}">{{bmi || '--'}} ({{bmiStatus.text}})</text>
+      </view>
+    </view>
+
+    <view class="goal-setting">
+      <text class="section-title">目标设定</text>
+      <view class="input-group">
+        <text class="label">目标体重</text>
+        <input 
+          type="digit" 
+          class="weight-input" 
+          value="{{targetWeight}}"
+          bindinput="onTargetWeightInput"
+          placeholder="请输入"
+        />
+      </view>
+      
+      <view class="health-range" wx:if="{{healthyWeightRange}}">
+        <text class="range-text">健康范围: {{healthyWeightRange.min}}-{{healthyWeightRange.max}}kg</text>
+        <text class="range-tip {{isTargetHealthy ? 'healthy' : 'warning'}}">
+          {{isTargetHealthy ? '目标合理' : '不在建议范围'}}
+        </text>
+      </view>
+
+      <view class="time-setting">
+        <view class="label">
+          <text>计划周期</text>
+          <text class="value">{{days}}天</text>
+        </view>
+        <slider 
+          min="28" 
+          max="112" 
+          step="1" 
+          value="{{days}}"
+          block-size="20"
+          activeColor="#4CAF50"
+          bindchanging="onDaysChange"
+          bindchange="onDaysChange"
+        />
+        <view class="time-tips">
+          <text class="tip {{weeklyGoal <= 0.5 ? 'healthy' : 'warning'}}">
+            {{weeklyGoal}}kg/周
+            <text wx:if="{{weeklyGoal > 0.5}}">（超出建议）</text>
+          </text>
+        </view>
+      </view>
+    </view>
+
+    <view class="plan-details" wx:if="{{showPlan}}">
+      <text class="section-title">减重计划</text>
+      
+      <view class="plan-item">
+        <text class="label">总需减重</text>
+        <view class="value-wrapper">
+          <text class="value">{{weightToLose}}</text>
+          <text class="unit">kg</text>
+        </view>
+      </view>
+
+      <view class="plan-item">
+        <text class="label">每周减重目标</text>
+        <view class="value-wrapper">
+          <text class="value {{weeklyGoal > 0.5 ? 'warning' : 'healthy'}}">{{weeklyGoal}}</text>
+          <text class="unit">kg/周</text>
+          <text class="tip" wx:if="{{weeklyGoal > 0.5}}">（建议放慢速度）</text>
+        </view>
+      </view>
+
+      <view class="plan-item">
+        <text class="label">每日能量缺口</text>
+        <view class="value-wrapper">
+          <text class="value {{dailyDeficit > 500 ? 'warning' : 'healthy'}}">{{dailyDeficit}}</text>
+          <text class="unit">千卡</text>
+          <text class="tip" wx:if="{{dailyDeficit > 500}}">（建议≤500）</text>
+        </view>
+      </view>
+
+      <view class="plan-item">
+        <text class="label">建议每日摄入</text>
+        <view class="value-wrapper">
+          <text class="value">{{suggestedIntake}}</text>
+          <text class="unit">千卡</text>
+        </view>
+      </view>
+
+      <view class="health-tips">
+        <text class="tips-title">健康建议</text>
+        <view class="tip-item">• 健康减重速度为每周0.25-0.5kg</view>
+        <view class="tip-item">• 每日能量缺口建议在300-500千卡之间</view>
+        <view class="tip-item">• 保持规律运动，每周150分钟中等强度运动</view>
+        <view class="tip-item">• 确保每日蛋白质摄入1.6-2.2g/kg体重</view>
+        <view class="tip-item">• 保持充足睡眠，每晚7-8小时</view>
+        <view class="tip-item">• 多喝水，每日建议2000ml以上</view>
+      </view>
+    </view>
+  </view>
+
+  <button 
+    class="submit-btn {{isHealthyPlan ? '' : 'warning'}}" 
+    bindtap="saveWeightGoal" 
+    wx:if="{{showPlan}}"
+  >
+    {{isHealthyPlan ? '开始计划' : '计划可能过于激进，建议调整'}}
+  </button>
+</view> 

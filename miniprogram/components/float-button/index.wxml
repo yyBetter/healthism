@@ -1,0 +1,5 @@
+<view class="float-button" bindtap="handleTriggerUpdate">
+  <view class="button-inner">
+    <text class="text">更新数据</text>
+  </view>
+</view> 

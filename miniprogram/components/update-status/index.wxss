@@ -1,0 +1,27 @@
+.update-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.time {
+  color: #999;
+}
+
+.status {
+  padding: 4rpx 16rpx;
+  border-radius: 24rpx;
+  font-size: 22rpx;
+}
+
+.status-good {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.status-warning {
+  background: #fff3e0;
+  color: #ff9800;
+} 

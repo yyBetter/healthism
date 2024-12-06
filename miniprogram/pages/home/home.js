@@ -10,17 +10,23 @@ Page({
     todayStats: {
       steps: '--',
       calories: '--',
-      distance: '--'
-    }
+      distance: '--',
+      activeCalories: '--'
+    },
+    lastUpdateTime: 0,
+    healthStatus: '',
+    healthProfile: {}
   },
 
   onLoad() {
     this.checkLoginStatus()
+    this.updateData()
   },
 
   onShow() {
-    // 每次页面显示时检查登录状态
     this.checkLoginStatus()
+    this.updateData()
+    this.loadHealthProfile()
   },
 
   // 检查登录状态
@@ -40,33 +46,56 @@ Page({
         todayStats: {
           steps: '--',
           calories: '--',
-          distance: '--'
+          distance: '--',
+          activeCalories: '--'
         }
+      })
+    }
+  },
+
+  // 加载健康档案
+  loadHealthProfile() {
+    if (!this.data.isLogin) return
+    
+    const app = getApp()
+    const profile = app.getUserFullProfile()
+    
+    if (profile) {
+      const { healthProfile, weightGoal } = profile
+      this.setData({ 
+        healthProfile,
+        weightGoal: weightGoal ? {
+          ...weightGoal,
+          progress: this.calculateWeightProgress(weightGoal),
+          isHealthy: weightGoal.weeklyGoal <= 0.5
+        } : null
       })
     }
   },
 
   // 获取用户健康数据
   getUserHealthData() {
-    // 这里应该调用后端 API 获取真实数据
-    // 目前使用模拟数据
-    if (this.data.isLogin) {
-      wx.showLoading({
-        title: '加载中...'
-      })
+    if (!this.data.isLogin) return
 
-      // 模拟 API 请求
-      setTimeout(() => {
-        this.setData({
-          todayStats: {
-            steps: 6800,
-            calories: 350,
-            distance: 4.2
-          }
-        })
-        wx.hideLoading()
-      }, 500)
-    }
+    wx.showLoading({
+      title: '加载中...'
+    })
+
+    const app = getApp()
+    app.getDeviceHealthData().then(healthData => {
+      this.setData({
+        todayStats: {
+          steps: healthData.steps || '--',
+          calories: healthData.calories || '--',
+          distance: healthData.distance || '--',
+          activeCalories: healthData.activeCalories || '--'
+        }
+      })
+    }).catch(err => {
+      console.error('获取健康数据失败：', err)
+    }).finally(() => {
+      wx.hideLoading()
+    })
   },
 
   // 处理登录
@@ -87,7 +116,7 @@ Page({
         wx.login({
           success: (loginRes) => {
             if (loginRes.code) {
-              // TODO: 这里应该调用后端 API，用 code 换取用户的 openid 和 session_key
+              // TODO: 这应该调用后端 API，用 code 换取用户的 openid 和 session_key
               // 目前模拟登录成功
               setTimeout(() => {
                 // 补充用户 ID 等信息
@@ -190,7 +219,8 @@ Page({
             todayStats: {
               steps: '--',
               calories: '--',
-              distance: '--'
+              distance: '--',
+              activeCalories: '--'
             }
           })
           // 提示用户
@@ -213,7 +243,7 @@ Page({
       return
     }
     wx.navigateTo({
-      url: '/pages/goal/add'
+      url: '/pages/weight-goal/index'
     })
   },
 
@@ -230,5 +260,40 @@ Page({
     wx.navigateTo({
       url: `/pages/goal/detail?id=${id}`
     })
+  },
+
+  updateData() {
+    const app = getApp()
+    this.setData({
+      lastUpdateTime: app.globalData.lastUpdateTime,
+      healthStatus: app.checkHealthStatus(app.globalData.lastUpdateTime)
+    })
+  },
+
+  addWeightGoal() {
+    if (!this.data.isLogin) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '/pages/weight-goal/index'
+    })
+  },
+
+  editWeightGoal() {
+    if (!this.data.isLogin) return
+    wx.navigateTo({
+      url: '/pages/weight-goal/index?edit=true'
+    })
+  },
+
+  calculateWeightProgress(goal) {
+    const { currentWeight, targetWeight } = goal
+    const totalToLose = currentWeight - targetWeight
+    const actualLost = currentWeight - this.data.healthProfile.weight
+    return Math.min(100, Math.max(0, (actualLost / totalToLose) * 100)).toFixed(1)
   }
 }) 

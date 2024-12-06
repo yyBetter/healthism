@@ -1,0 +1,5 @@
+<view class="container">
+  <update-status lastUpdateTime="{{lastUpdateTime}}"></update-status>
+  <view style="height: 1000rpx;"></view>
+  <float-button></float-button>
+</view> 
