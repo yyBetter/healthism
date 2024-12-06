@@ -1,0 +1,111 @@
+<view class="container">
+  <date-picker 
+    date="{{currentDate}}" 
+    bind:change="onDateChange"
+  ></date-picker>
+
+  <!-- 目标进度卡片 -->
+  <view class="progress-card">
+    <view class="daily-target">
+      <text class="label">今日能量目标</text>
+      <text class="value">{{dailyTarget}} 千卡</text>
+    </view>
+    <view class="energy-balance">
+      <view class="balance-item">
+        <text class="label">已摄入</text>
+        <text class="value intake">{{totalIntake}} 千卡</text>
+      </view>
+      <view class="balance-item">
+        <text class="label">已消耗</text>
+        <text class="value burn">{{totalBurn}} 千卡</text>
+      </view>
+      <view class="balance-item">
+        <text class="label">剩余</text>
+        <text class="value {{remaining >= 0 ? '' : 'warning'}}">{{remaining}} 千卡</text>
+      </view>
+    </view>
+    <view class="progress-bar">
+      <view class="progress" style="width: {{progressPercent}}%"></view>
+    </view>
+  </view>
+
+  <!-- 消耗记录 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="title">运动消耗</text>
+      <view class="add-btn" bindtap="addExercise">
+        <text class="icon">+</text>
+        <text>添加运动</text>
+      </view>
+    </view>
+    <view class="exercise-list">
+      <view class="exercise-item" wx:for="{{exercises}}" wx:key="id" bindtap="editExercise" data-id="{{item.id}}">
+        <image class="exercise-icon" src="{{item.icon}}" mode="aspectFit"></image>
+        <view class="exercise-info">
+          <text class="name">{{item.name}}</text>
+          <text class="duration">{{item.duration}}分钟</text>
+        </view>
+        <text class="calories">-{{item.calories}}千卡</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 饮食记录 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="title">饮食记录</text>
+      <view class="meal-tabs">
+        <view class="tab {{currentMeal === 'breakfast' ? 'active' : ''}}" 
+              bindtap="switchMeal" data-meal="breakfast">早餐</view>
+        <view class="tab {{currentMeal === 'lunch' ? 'active' : ''}}" 
+              bindtap="switchMeal" data-meal="lunch">午餐</view>
+        <view class="tab {{currentMeal === 'dinner' ? 'active' : ''}}" 
+              bindtap="switchMeal" data-meal="dinner">晚餐</view>
+        <view class="tab {{currentMeal === 'snacks' ? 'active' : ''}}" 
+              bindtap="switchMeal" data-meal="snacks">加餐</view>
+      </view>
+      <view class="add-btn" bindtap="addFood">
+        <text class="icon">+</text>
+        <text>添加食物</text>
+      </view>
+    </view>
+    <view class="food-list">
+      <view class="food-item" wx:for="{{foods[currentMeal]}}" wx:key="id" 
+            bindtap="editFood" data-id="{{item.id}}">
+        <image class="food-icon" src="{{item.icon}}" mode="aspectFit"></image>
+        <view class="food-info">
+          <text class="name">{{item.name}}</text>
+          <text class="portion">{{item.portion}}克</text>
+        </view>
+        <view class="nutrition">
+          <text class="calories">{{item.calories}}千卡</text>
+          <text class="macros">蛋白质{{item.protein}}g</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 营养摄入分析 -->
+  <view class="nutrition-analysis">
+    <view class="macro-chart">
+      <!-- 这里可以添加营养素比例的环形图 -->
+    </view>
+    <view class="macro-list">
+      <view class="macro-item">
+        <text class="label">蛋白质</text>
+        <text class="value">{{totalProtein}}g</text>
+        <text class="target">/{{proteinTarget}}g</text>
+      </view>
+      <view class="macro-item">
+        <text class="label">碳水</text>
+        <text class="value">{{totalCarbs}}g</text>
+        <text class="target">/{{carbsTarget}}g</text>
+      </view>
+      <view class="macro-item">
+        <text class="label">脂肪</text>
+        <text class="value">{{totalFat}}g</text>
+        <text class="target">/{{fatTarget}}g</text>
+      </view>
+    </view>
+  </view>
+</view> 

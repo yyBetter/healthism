@@ -1,0 +1,216 @@
+/* 容器样式 */
+.container {
+  padding: 30rpx;
+  background: #f8f8f8;
+}
+
+/* 日期选择器 */
+.date-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+
+.current-date {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin: 0 30rpx;
+}
+
+.arrow {
+  padding: 10rpx 20rpx;
+  color: #4CAF50;
+}
+
+/* 进度卡片 */
+.progress-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.daily-target {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.energy-balance {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.balance-item {
+  text-align: center;
+}
+
+.balance-item .label {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.balance-item .value {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.value.intake { color: #FF9800; }
+.value.burn { color: #4CAF50; }
+.value.warning { color: #F44336; }
+
+.progress-bar {
+  height: 8rpx;
+  background: #E0E0E0;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #4CAF50;
+  transition: width 0.3s ease;
+}
+
+/* 运动和饮食记录部分 */
+.section {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 20rpx;
+  background: #4CAF50;
+  border-radius: 30rpx;
+  color: #fff;
+}
+
+.add-btn .icon {
+  margin-right: 8rpx;
+}
+
+/* 运动列表 */
+.exercise-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.exercise-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+
+.exercise-info {
+  flex: 1;
+}
+
+.calories {
+  font-weight: 500;
+  color: #4CAF50;
+}
+
+/* 餐次标签 */
+.meal-tabs {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.tab {
+  padding: 10rpx 30rpx;
+  font-size: 28rpx;
+  color: #666;
+  border-radius: 30rpx;
+  margin-right: 20rpx;
+}
+
+.tab.active {
+  background: #E8F5E9;
+  color: #4CAF50;
+}
+
+/* 食物列表 */
+.food-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.food-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+
+.food-info {
+  flex: 1;
+}
+
+.nutrition {
+  text-align: right;
+}
+
+.macros {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+}
+
+/* 营养分析 */
+.nutrition-analysis {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+}
+
+.macro-list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
+.macro-item {
+  text-align: center;
+}
+
+.macro-item .label {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+}
+
+.macro-item .value {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #4CAF50;
+}
+
+.macro-item .target {
+  font-size: 24rpx;
+  color: #999;
+} 
