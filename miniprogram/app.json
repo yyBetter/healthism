@@ -5,7 +5,8 @@
     "pages/explore/explore",
     "pages/login/login",
     "pages/profile/edit",
-    "pages/weight-goal/index"
+    "pages/weight-goal/index",
+    "pages/daily-record/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -33,5 +34,8 @@
         "selectedIconPath": "assets/tabs/explore-active.png"
       }
     ]
+  },
+  "usingComponents": {
+    "date-picker": "/components/date-picker/index"
   }
 } 

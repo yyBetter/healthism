@@ -1,18 +1,1 @@
-<view class="container">
-  <view class="decoration decoration-1"></view>
-  <view class="decoration decoration-2"></view>
-  
-  <view class="welcome-section">
-    <image class="logo" src="https://www.example.com/placeholder.png" mode="aspectFit"></image>
-    <text class="title">{{motto}}</text>
-    <text class="slogan">记录美好生活 · 分享健康日常</text>
-    
-    <block wx:if="{{!hasUserInfo}}">
-      <button class="auth-button" bindtap="getUserProfile">开启健康生活</button>
-    </block>
-    <block wx:else>
-      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-</view> 
+<view></view> 

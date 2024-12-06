@@ -1,0 +1,15 @@
+<view class="date-picker">
+  <view class="date-nav">
+    <view class="arrow" bindtap="prevDay">◀</view>
+    <view class="date-info" bindtap="showCalendar">
+      <block wx:if="{{isToday}}">
+        <text class="today-tag">今天</text>
+      </block>
+      <block wx:else>
+        <text class="date">{{formatDate}}</text>
+      </block>
+      <text class="calendar-icon">📅</text>
+    </view>
+    <view class="arrow {{isToday ? 'disabled' : ''}}" bindtap="{{isToday ? '' : 'nextDay'}}">▶</view>
+  </view>
+</view> 

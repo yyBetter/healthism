@@ -1,0 +1,42 @@
+.date-picker {
+  position: relative;
+  margin: 20rpx 0;
+}
+
+.date-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+
+.date-info {
+  display: flex;
+  align-items: center;
+  padding: 0 40rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.today-tag {
+  color: #4CAF50;
+  margin-right: 8rpx;
+}
+
+.calendar-icon {
+  margin-left: 8rpx;
+  font-size: 28rpx;
+}
+
+.arrow {
+  padding: 20rpx;
+  color: #4CAF50;
+  font-size: 24rpx;
+}
+
+.arrow.disabled {
+  color: #ccc;
+} 

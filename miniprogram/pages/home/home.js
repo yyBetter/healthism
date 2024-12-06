@@ -15,15 +15,19 @@ Page({
     },
     lastUpdateTime: 0,
     healthStatus: '',
-    healthProfile: {}
+    healthProfile: {},
+    currentDate: ''
   },
 
   onLoad() {
+    console.log('home page onLoad')
     this.checkLoginStatus()
     this.updateData()
+    this.initDate()
   },
 
   onShow() {
+    console.log('home page onShow')
     this.checkLoginStatus()
     this.updateData()
     this.loadHealthProfile()
@@ -31,25 +35,29 @@ Page({
 
   // 检查登录状态
   checkLoginStatus() {
-    const userInfo = wx.getStorageSync('userInfo')
-    if (userInfo) {
-      this.setData({
-        isLogin: true,
-        userInfo: userInfo
-      })
-      // 获取用户的健康数据
-      this.getUserHealthData()
-    } else {
-      this.setData({
-        isLogin: false,
-        userInfo: {},
-        todayStats: {
-          steps: '--',
-          calories: '--',
-          distance: '--',
-          activeCalories: '--'
-        }
-      })
+    try {
+      const userInfo = wx.getStorageSync('userInfo')
+      if (userInfo) {
+        this.setData({
+          isLogin: true,
+          userInfo: userInfo
+        })
+        // 获取用户的健康数据
+        this.getUserHealthData()
+      } else {
+        this.setData({
+          isLogin: false,
+          userInfo: {},
+          todayStats: {
+            steps: '--',
+            calories: '--',
+            distance: '--',
+            activeCalories: '--'
+          }
+        })
+      }
+    } catch (error) {
+      console.error('检查登录状态失败:', error)
     }
   },
 
@@ -78,7 +86,7 @@ Page({
     if (!this.data.isLogin) return
 
     wx.showLoading({
-      title: '加载中...'
+      title: '载中...'
     })
 
     const app = getApp()
@@ -295,5 +303,34 @@ Page({
     const totalToLose = currentWeight - targetWeight
     const actualLost = currentWeight - this.data.healthProfile.weight
     return Math.min(100, Math.max(0, (actualLost / totalToLose) * 100)).toFixed(1)
+  },
+
+  // 初始化日期
+  initDate() {
+    const now = new Date()
+    const dateStr = this.formatDate(now)
+    this.setData({ currentDate: dateStr })
+  },
+
+  // 处理日期变化
+  onDateChange(e) {
+    const date = e.detail.date
+    this.setData({
+      currentDate: this.formatDate(date)
+    })
+    // 加载选中日期的数据
+    this.loadDailyData(date)
+  },
+
+  // 加载指定日期的数据
+  loadDailyData(date) {
+    if (!this.data.isLogin) return
+    // TODO: 根据日期加载对应的数据
+    this.getUserHealthData()
+  },
+
+  // 格式化日期
+  formatDate(date) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
   }
 }) 

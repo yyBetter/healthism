@@ -1,4 +1,10 @@
 <view class="container">
+  <!-- 日期选择器 -->
+  <date-picker 
+    date="{{currentDate}}" 
+    bind:change="onDateChange"
+  ></date-picker>
+
   <!-- 用户信息卡片 -->
   <view class="user-card">
     <!-- 未登录状态 -->
@@ -127,6 +133,4 @@
       <text class="tips-text">登录后查看您的健康目标</text>
     </view>
   </view>
-
-  <float-button></float-button>
 </view> 
